@@ -1,0 +1,26 @@
+{
+  "starred": false,
+  "editors_can_edit_access": true,
+  "last_modified_by_any_user": "2025-05-06T05:05:36.069Z",
+  "last_modified_by_me": "2025-05-06T05:05:31.098Z",
+  "content_last_modified": "2025-05-06T05:05:36.069Z",
+  "created": "2025-05-06T05:04:40.451Z",
+  "permissions": [
+    {
+      "id": "08015668199236022139",
+      "name": "fs charters",
+      "type": "user",
+      "role": "owner",
+      "value": "fschartered@gmail.com",
+      "kind": "drive#permission",
+      "photo_link": "https://lh3.googleusercontent.com/a/ACg8ocKWGV3QG9L2kW1yg8VYa6Y_zZFJNTioh1Le4_x4OVowgzp6Sw=s64",
+      "email_address": "fschartered@gmail.com",
+      "domain": "gmail.com",
+      "deleted": false,
+      "pending_owner": false
+    }
+  ],
+  "title": " export fivespace.xyz",
+  "drive_id": "1_-UR7PSrfpITNydNN0uv5Nsh_EFaHlNB",
+  "mime_type": "application/vnd.google-apps.site"
+}
