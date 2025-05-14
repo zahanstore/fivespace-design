@@ -21,7 +21,141 @@
 try{
 _._F_toggles_initialize=function(a){(typeof globalThis!=="undefined"?globalThis:typeof self!=="undefined"?self:this)._F_toggles=a||[]};(0,_._F_toggles_initialize)([0x3003000, 0x0, ]);
 /*
+<!-- ======= GOOGLE SITES STYLE MENU (ENHANCED) ======= -->
+<style>
+  /* Main Navigation Styles */
+  :root {
+    --primary-color: #1a73e8; /* Google blue from your site */
+    --hover-color: #2b7de9;
+    --text-color: white;
+  }
+  
+  .g-sites-menu {
+    font-family: 'Google Sans', Arial, sans-serif;
+    background: var(--primary-color);
+    padding: 12px 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .g-sites-nav {
+    display: flex;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+  }
+  
+  .g-sites-nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 15px;
+    margin: 0 5px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+  
+  .g-sites-nav a:hover {
+    background: var(--hover-color);
+  }
+  
+  /* Mobile Hamburger Menu */
+  .hamburger {
+    display: none;
+    cursor: pointer;
+    padding: 10px;
+  }
+  
+  .hamburger div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px 0;
+    transition: 0.4s;
+  }
+  
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .g-sites-nav {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .g-sites-nav a {
+      display: none;
+      width: 100%;
+      padding: 12px 15px;
+      box-sizing: border-box;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .g-sites-nav.active a {
+      display: block;
+    }
+    
+    .hamburger {
+      display: block;
+      position: absolute;
+      right: 20px;
+      top: 12px;
+    }
+    
+    /* Hamburger animation */
+    .hamburger.active div:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    
+    .hamburger.active div:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .hamburger.active div:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
+  }
+</style>
 
+<!-- Navigation Menu -->
+<nav class="g-sites-menu">
+  <div class="g-sites-nav" id="mainNav">
+    <!-- Hamburger Icon (Mobile Only) -->
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    
+    <!-- Menu Links -->
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<script>
+  // Toggle mobile menu
+  function toggleMenu() {
+    const nav = document.getElementById('mainNav');
+    const hamburger = document.querySelector('.hamburger');
+    nav.classList.toggle('active');
+    hamburger.classList.toggle('active');
+  }
+  
+  // Close menu when clicking a link (mobile)
+  document.querySelectorAll('.g-sites-nav a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 768) {
+        document.getElementById('mainNav').classList.remove('active');
+        document.querySelector('.hamburger').classList.remove('active');
+      }
+    });
+  });
+</script>
  Copyright The Closure Library Authors.
  SPDX-License-Identifier: Apache-2.0
 */
