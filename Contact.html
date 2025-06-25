@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | FiveSpace Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="1c7a35cb40c98ed3e40fe122d8381476.jpg" type="image/jpg">
+    <style>
+        :root {
+            --primary-color: #2c82d1;
+            --secondary-color: #f5f2d5;
+            --accent-color: #2c82d1;
+            --hover-color: #1a6cb3;
+            --text-color: #ffffff;
+            --footer-text: #666666;
+            --nav-bg: rgba(245, 242, 213, 0.95);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f5f2d5;
+            color: #333333;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding-top: 70px;
+        }
+        
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--nav-bg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-nav {
+            height: 40px;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-nav:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #333;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            position: relative;
+        }
+        
+        .nav-link {
+            color: #333;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+        
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--nav-bg);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 0 0 8px 8px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-link {
+            display: block;
+            padding: 10px 15px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .dropdown-link:hover {
+            background: rgba(44, 130, 209, 0.1);
+            color: var(--primary-color);
+            padding-left: 20px;
+        }
+        
+        .dropdown-link i {
+            margin-right: 8px;
+            width: 15px;
+            text-align: center;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #333;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        /* Lightning-Fast Mobile Navigation */
+        @media (max-width: 992px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--nav-bg);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                overflow-y: auto;
+                transform: translateX(-100%);
+                will-change: transform;
+                backface-visibility: hidden;
+                perspective: 1000px;
+            }
+            
+            .nav-menu.active {
+                transform: translateX(0);
+            }
+            
+            .nav-item {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .nav-link {
+                justify-content: center;
+                padding: 15px;
+            }
+            
+            .dropdown {
+                position: static;
+                display: none;
+                box-shadow: none;
+                border-radius: 0;
+                width: 100%;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+            }
+            
+            .dropdown.active {
+                display: block;
+            }
+            
+            .dropdown-link {
+                padding: 12px 15px;
+                background: rgba(0,0,0,0.03);
+            }
+            
+            .logo-title {
+                display: none;
+            }
+        }
+        
+        /* Contact Page Specific Styles */
+        .container {
+            width: 100%;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .contact-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            padding: 2rem;
+            background-color: rgba(255,255,255,0.7);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease-out forwards;
+        }
+        
+        .contact-heading {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        .contact-text {
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .contact-btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .email-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .chat-btn {
+            background-color: #0088cc;
+            color: white;
+        }
+        
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            max-width: 1000px;
+            margin: 0 auto 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 0.3s;
+        }
+        
+        .quick-link {
+            padding: 0.8rem;
+            background-color: rgba(255,255,255,0.7);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+        }
+        
+        .quick-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--footer-text);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            background-color: rgba(255,255,255,0.3);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--footer-text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .quick-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .quick-links {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-content {
+                padding: 1.5rem;
+            }
+            
+            .contact-heading {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo-wrapper">
+                <a href="https://fivespace.netlify.app/Home.html" class="logo-link">
+                    <img src="1c7a35cb40c98ed3e40fe122d8381476.jpg" alt="FiveSpace Logo" class="logo-nav">
+                </a>
+                <span class="logo-title">FiveSpace Design Studio</span>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="https://fivespace.netlify.app/Home.html" class="nav-link">Home</a>
+                </li>
+                
+                <li class="nav-item dropdown-item">
+                    <a href="https://fivespace.netlify.app/Projects.html" class="nav-link">Projects <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="https://fivespace.netlify.app/Featured.html" class="dropdown-link"><i class="fas fa-star"></i> Featured</a></li>
+                        <li><a href="https://fivespace.netlify.app/Projects by Category.html" class="dropdown-link"><i class="fas fa-folder"></i> Project By Category</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item dropdown-item">
+                    <a href="https://fivespace.netlify.app/Services.html" class="nav-link">Services <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="https://fivespace.netlify.app/Work Process.html" class="dropdown-link"><i class="fas fa-project-diagram"></i> Work Process</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item dropdown-item">
+                    <a href="https://fivespace.netlify.app/About.html" class="nav-link">About <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="https://fivespace.netlify.app/About  Founder.html" class="dropdown-link"><i class="fas fa-user-tie"></i> About Founder</a></li>
+                        <li><a href="https://fivespace.netlify.app/Our Businesses.html" class="dropdown-link"><i class="fas fa-building"></i> Our Business</a></li>
+                        <li><a href="https://fivespace.netlify.app/Associates.html" class="dropdown-link"><i class="fas fa-handshake"></i> Associates</a></li>
+                        <li><a href="https://sites.google.com/view/fivespace-chartered-realty" target="_blank" class="dropdown-link"><i class="fas fa-home"></i> FiveSpace Realty</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://fivespace.netlify.app/Contact.html" class="nav-link">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content - Contact Page -->
+    <div class="container">
+        <div class="contact-content">
+            <h2 class="contact-heading">Contact FiveSpace</h2>
+            <p class="contact-text">
+                Whatever your comments are, we want to hear from you. Just send us email below and we'll respond as soon as possible. 
+                Giving the best support to you is our priority. We know you're a real person with real questions. 
+                Just let us know what you need.
+            </p>
+            
+            <p class="contact-text">
+                <strong>Email & Chat support.</strong><br>
+                Send us a mail or Chat and we will get back to you soon.
+            </p>
+            
+            <div class="contact-buttons">
+                <a href="mailto:sales@fivespace.app" class="contact-btn email-btn">
+                    <i class="fas fa-envelope"></i> Email Us
+                </a>
+                <a href="https://t.me/fivespaceofficial" target="_blank" class="contact-btn chat-btn">
+                    <i class="fab fa-telegram"></i> Chat With Us
+                </a>
+            </div>
+        </div>
+        
+        <!-- Quick Links Section -->
+        <div class="quick-links">
+            <a href="https://fivespace.netlify.app/Projects by Category.html" class="quick-link">🚦 Back to Category</a>
+            <a href="https://fivespace.netlify.app/Home.html" class="quick-link">🏕️ Back to Home</a>
+            <a href="https://fivespace.netlify.app/Projects.html" class="quick-link">🦕 Back to All Projects</a>
+            <a href="mailto:sales@fivespace.app" class="quick-link">✉️ Email: sales@fivespace.app</a>
+            <a href="#" class="quick-link">📹 Visit us: YouTube</a>
+            <a href="https://t.me/fivespaceofficial" target="_blank" class="quick-link">💬 Social: Telegram</a>
+            <a href="#" class="quick-link">🗃️ Utilities</a>
+            <a href="https://fivespace.netlify.app/Privacy policy.html" class="quick-link">⚖️ Privacy Policy</a>
+            <a href="https://fivespace.netlify.app/terms conditions.html" class="quick-link">📃 Terms & Conditions</a>
+            <a href="#" class="quick-link">🚧 404</a>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div>© 2025 FiveSpace Design. All rights reserved.</div>
+        <div class="footer-links">
+            <a href="https://fivespace.netlify.app/terms conditions.html">Terms and Conditions</a>
+            <a href="https://fivespace.netlify.app/Privacy policy.html">Privacy Policy</a>
+        </div>
+    </footer>
+    
+    <script>
+        // Pre-cache DOM elements for maximum performance
+        const dom = {
+            mobileBtn: document.getElementById('mobileMenuBtn'),
+            navMenu: document.getElementById('navMenu'),
+            navIcon: document.getElementById('mobileMenuBtn').querySelector('i'),
+            dropdownItems: document.querySelectorAll('.dropdown-item')
+        };
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // INSTANT mobile menu toggle
+            dom.mobileBtn.addEventListener('click', function() {
+                const isActive = dom.navMenu.classList.toggle('active');
+                dom.navIcon.className = isActive ? 'fas fa-times' : 'fas fa-bars';
+                
+                // Force synchronous layout update for zero delay
+                void dom.navMenu.offsetWidth;
+            }, {passive: true});
+            
+            // Enhanced dropdown functionality for desktop
+            dom.dropdownItems.forEach(item => {
+                const link = item.querySelector('.nav-link');
+                const dropdown = item.querySelector('.dropdown');
+                
+                // For desktop - hover behavior
+                item.addEventListener('mouseenter', () => {
+                    if (window.innerWidth > 992) {
+                        dropdown.style.opacity = '1';
+                        dropdown.style.visibility = 'visible';
+                        dropdown.style.transform = 'translateY(0)';
+                    }
+                });
+                
+                item.addEventListener('mouseleave', () => {
+                    if (window.innerWidth > 992) {
+                        dropdown.style.opacity = '0';
+                        dropdown.style.visibility = 'hidden';
+                        dropdown.style.transform = 'translateY(10px)';
+                    }
+                });
+                
+                // For mobile - click behavior
+                if (window.innerWidth <= 992) {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        dropdown.classList.toggle('active');
+                    }, {passive: false});
+                }
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (window.innerWidth <= 992 && 
+                    !e.target.closest('.nav-container') && 
+                    dom.navMenu.classList.contains('active')) {
+                    dom.navMenu.classList.remove('active');
+                    dom.navIcon.className = 'fas fa-bars';
+                }
+            }, {passive: true});
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 992 && dom.navMenu.classList.contains('active')) {
+                    dom.navMenu.classList.remove('active');
+                    dom.navIcon.className = 'fas fa-bars';
+                    
+                    // Close all dropdowns on desktop
+                    document.querySelectorAll('.dropdown').forEach(dropdown => {
+                        dropdown.classList.remove('active');
+                    });
+                }
+            }, {passive: true});
+            
+            // Allow navigation to main links while keeping dropdown functionality
+            dom.dropdownItems.forEach(item => {
+                const link = item.querySelector('.nav-link');
+                
+                link.addEventListener('click', function(e) {
+                    if (window.innerWidth > 992) {
+                        e.preventDefault();
+                        window.location.href = this.href;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
