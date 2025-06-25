@@ -57,3 +57,18 @@ body {
         display: block;
     }
 }
+
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-nav {
+    transition: all 0.3s ease;
+}
+
+.logo-title {
+    font-weight: 600;
+    color: var(--primary-color);
+}
