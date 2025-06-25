@@ -426,53 +426,65 @@
 <body>
 
     <!-- Navigation Bar -->
-<nav class="navbar">
-    <div class="nav-container">
-        <div class="logo-wrapper">
-            <a href="https://fivespace.netlify.app/Home.html" class="logo-link">
-                <img src="1c7a35cb40c98ed3e40fe122d8381476.jpg" alt="FiveSpace Logo" class="logo-nav" style="max-height: 40px;">
-            </a>
-            <span class="logo-title">FiveSpace Design Studio</span>
-        </div>
-        
-        <button class="mobile-menu-btn" id="mobileMenuBtn">
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <!-- Logo - Made consistent with other pages -->
+        <a class="navbar-brand" href="https://fivespace.netlify.app/Home.html">
+            <img src="1c7a35cb40c98ed3e40fe122d8381476.jpg" alt="FiveSpace Logo" style="height: 40px; width: auto;">
+            <span class="ms-2 d-none d-lg-inline" style="font-weight: 600; color: var(--primary-color);">FiveSpace Design Studio</span>
+        </a>
+
+        <!-- Mobile Toggle Button -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-bars"></i>
         </button>
-        
-        <ul class="nav-menu" id="navMenu">
-            <li class="nav-item">
-                <a href="https://fivespace.netlify.app/Home.html" class="nav-link">Home</a>
-            </li>
-            
-            <li class="nav-item dropdown-item">
-                <a href="https://fivespace.netlify.app/Projects.html" class="nav-link">Projects <i class="fas fa-chevron-down"></i></a>
-                <ul class="dropdown">
-                    <li><a href="https://fivespace.netlify.app/Featured.html" class="dropdown-link"><i class="fas fa-star"></i> Featured</a></li>
-                    <li><a href="https://fivespace.netlify.app/Projects by Category.html" class="dropdown-link"><i class="fas fa-folder"></i> Project By Category</a></li>
-                </ul>
-            </li>
-            
-            <li class="nav-item dropdown-item">
-                <a href="https://fivespace.netlify.app/Services.html" class="nav-link">Services <i class="fas fa-chevron-down"></i></a>
-                <ul class="dropdown">
-                    <li><a href="https://fivespace.netlify.app/Work Process.html" class="dropdown-link"><i class="fas fa-project-diagram"></i> Work Process</a></li>
-                </ul>
-            </li>
-            
-            <li class="nav-item dropdown-item">
-                <a href="https://fivespace.netlify.app/About.html" class="nav-link">About <i class="fas fa-chevron-down"></i></a>
-                <ul class="dropdown">
-                    <li><a href="https://fivespace.netlify.app/About  Founder.html" class="dropdown-link"><i class="fas fa-user-tie"></i> About Founder</a></li>
-                    <li><a href="https://fivespace.netlify.app/Our Businesses.html" class="dropdown-link"><i class="fas fa-building"></i> Our Business</a></li>
-                    <li><a href="https://fivespace.netlify.app/Associates.html" class="dropdown-link"><i class="fas fa-handshake"></i> Associates</a></li>
-                    <li><a href="https://sites.google.com/view/fivespace-chartered-realty" target="_blank" class="dropdown-link"><i class="fas fa-home"></i> FiveSpace Realty</a></li>
-                </ul>
-            </li>
-            
-            <li class="nav-item">
-                <a href="https://fivespace.netlify.app/Contact.html" class="nav-link">Contact</a>
-            </li>
-        </ul>
+
+        <!-- Navigation Menu -->
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://fivespace.netlify.app/Home.html">Home</a>
+                </li>
+                
+                <!-- Projects Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="projectsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Projects
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="projectsDropdown">
+                        <li><a class="dropdown-item" href="https://fivespace.netlify.app/Featured.html"><i class="fas fa-star me-2"></i>Featured</a></li>
+                        <li><a class="dropdown-item" href="https://fivespace.netlify.app/Projects by Category.html"><i class="fas fa-folder me-2"></i>By Category</a></li>
+                    </ul>
+                </li>
+                
+                <!-- Services Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Services
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                        <li><a class="dropdown-item" href="https://fivespace.netlify.app/Work Process.html"><i class="fas fa-project-diagram me-2"></i>Work Process</a></li>
+                    </ul>
+                </li>
+                
+                <!-- About Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        About
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                        <li><a class="dropdown-item" href="https://fivespace.netlify.app/About  Founder.html"><i class="fas fa-user-tie me-2"></i>Founder</a></li>
+                        <li><a class="dropdown-item" href="https://fivespace.netlify.app/Our Businesses.html"><i class="fas fa-building me-2"></i>Our Business</a></li>
+                        <li><a class="dropdown-item" href="https://fivespace.netlify.app/Associates.html"><i class="fas fa-handshake me-2"></i>Associates</a></li>
+                        <li><a class="dropdown-item" href="https://sites.google.com/view/fivespace-chartered-realty" target="_blank"><i class="fas fa-home me-2"></i>FiveSpace Realty</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="https://fivespace.netlify.app/Contact.html">Contact</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
 
