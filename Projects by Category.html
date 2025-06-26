@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects by Category | FiveSpace Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="1c7a35cb40c98ed3e40fe122d8381476.jpg" type="image/jpg">
+    <style>
+        /* All the previous CSS from the template remains the same until .container */
+        
+        /* Projects Page Specific Styles */
+        .projects-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease-out forwards;
+        }
+        
+        .projects-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .projects-title {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .projects-intro {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            color: #555;
+        }
+        
+        .category-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .category-tag {
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .category-tag:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .category-section {
+            margin-bottom: 4rem;
+        }
+        
+        .category-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .coming-soon {
+            position: relative;
+        }
+        
+        .coming-soon::after {
+            content: "Coming Soon";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .project-details {
+            padding: 1.5rem;
+        }
+        
+        .project-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .project-location {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #666;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #777;
+        }
+        
+        .project-type {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .did-you-know {
+            background: var(--form-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 4rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .did-you-know h3 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .sector-list {
+            list-style-type: none;
+        }
+        
+        .sector-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed rgba(0,0,0,0.1);
+        }
+        
+        .sector-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .sector-title {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .sector-desc {
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+            
+            .category-title {
+                font-size: 1.5rem;
+            }
+            
+            .projects-title {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-tags {
+                gap: 0.5rem;
+            }
+            
+            .category-tag {
+                padding: 0.6rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar (Same as template) -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo-wrapper">
+                <a href="https://fivespace.netlify.app/Home.html" class="logo-link">
+                    <img src="1c7a35cb40c98ed3e40fe122d8381476.jpg" alt="FiveSpace Logo" class="logo-nav">
+                </a>
+                <span class="logo-title">FiveSpace Design Studio</span>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="https://fivespace.netlify.app/Home.html" class="nav-link">Home</a>
+                </li>
+                
+                <li class="nav-item dropdown-item">
+                    <a href="https://fivespace.netlify.app/Projects.html" class="nav-link">Projects <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="https://fivespace.netlify.app/Featured.html" class="dropdown-link"><i class="fas fa-star"></i> Featured</a></li>
+                        <li><a href="https://fivespace.netlify.app/Projects by Category.html" class="dropdown-link"><i class="fas fa-folder"></i> Project By Category</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item dropdown-item">
+                    <a href="https://fivespace.netlify.app/Services.html" class="nav-link">Services <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="https://fivespace.netlify.app/Work Process.html" class="dropdown-link"><i class="fas fa-project-diagram"></i> Work Process</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item dropdown-item">
+                    <a href="https://fivespace.netlify.app/About.html" class="nav-link">About <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="https://fivespace.netlify.app/About  Founder.html" class="dropdown-link"><i class="fas fa-user-tie"></i> About Founder</a></li>
+                        <li><a href="https://fivespace.netlify.app/Our Businesses.html" class="dropdown-link"><i class="fas fa-building"></i> Our Business</a></li>
+                        <li><a href="https://fivespace.netlify.app/Associates.html" class="dropdown-link"><i class="fas fa-handshake"></i> Associates</a></li>
+                        <li><a href="https://sites.google.com/view/fivespace-chartered-realty" target="_blank" class="dropdown-link"><i class="fas fa-home"></i> FiveSpace Realty</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://fivespace.netlify.app/Contact.html" class="nav-link">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Banner Section -->
+    <div class="banner-container">
+        <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Architecture Banner" class="banner-image">
+        <div class="banner-overlay">
+            <div class="banner-text">
+                <h1>Our Projects Portfolio</h1>
+                <p>Explore our diverse range of design projects across multiple categories</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content - Projects by Category -->
+    <div class="container">
+        <div class="projects-container">
+            <div class="projects-header">
+                <h2 class="projects-title">VIEW ALL PROJECTS BY CATEGORY</h2>
+                <p class="projects-intro">
+                    Dear visitors, please view our entire projects spectrum on this page, completed to date. 
+                    Synchronized to years wise, and project type wise, you can also browse projects by year, 
+                    type, reports (pdf's) & country wise. We welcome you to our design novelties!
+                </p>
+            </div>
+            
+            <!-- Category Tags -->
+            <div class="category-tags">
+                <span class="category-tag">📕 Architecture - AD</span>
+                <span class="category-tag">📘 Interior - ID</span>
+                <span class="category-tag">📗 Landscape - LD</span>
+                <span class="category-tag">📙 Urban - UD</span>
+                <span class="category-tag">📒 Sustainable - SD</span>
+                <span class="category-tag">📓 Archviz - AV</span>
+            </div>
+            
+            <!-- Architecture Projects -->
+            <div class="category-section">
+                <h3 class="category-title">📕 Architecture Design</h3>
+                <div class="projects-grid">
+                    <!-- Project 12AD -->
+                    <div class="project-card">
+                        <div class="coming-soon">
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Project 12AD" class="project-image">
+                        </div>
+                        <div class="project-details">
+                            <h4 class="project-name">Project 12AD</h4>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> Apartment in Dubai
+                            </div>
+                            <span class="project-type">COMING SOON</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 11AD -->
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Project 11AD" class="project-image">
+                        <div class="project-details">
+                            <h4 class="project-name">Project 11AD</h4>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> Villa in Montreal
+                            </div>
+                            <span class="project-type">RESIDENTIAL (RESI)</span>
+                            <div class="project-meta">
+                                <span><i class="far fa-calendar"></i> 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 10AD -->
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Project 10AD" class="project-image">
+                        <div class="project-details">
+                            <h4 class="project-name">Project 10AD</h4>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> Villa in Dubai
+                            </div>
+                            <span class="project-type">RESIDENTIAL (RESI)</span>
+                            <div class="project-meta">
+                                <span><i class="fas fa-globe"></i> India</span>
+                                <span><i class="far fa-calendar"></i> 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 9AD -->
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Project 9AD" class="project-image">
+                        <div class="project-details">
+                            <h4 class="project-name">Project 9AD</h4>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> Villa in Dubai
+                            </div>
+                            <span class="project-type">RESIDENTIAL (RESI)</span>
+                            <div class="project-meta">
+                                <span><i class="fas fa-globe"></i> India</span>
+                                <span><i class="far fa-calendar"></i> 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Interior Design Projects -->
+            <div class="category-section">
+                <h3 class="category-title">📘 Interior Design</h3>
+                <div class="projects-grid">
+                    <!-- Project 17ID -->
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" alt="Project 17ID" class="project-image">
+                        <div class="project-details">
+                            <h4 class="project-name">Project 17ID</h4>
+                            <span class="project-type">WORKPLACE</span>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> Dubai, (UAE)
+                            </div>
+                            <div class="project-meta">
+                                <span><i class="far fa-calendar"></i> 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 16ID -->
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Project 16ID" class="project-image">
+                        <div class="project-details">
+                            <h4 class="project-name">Project 16ID</h4>
+                            <span class="project-type">WORKPLACE</span>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> Dubai, (UAE)
+                            </div>
+                            <div class="project-meta">
+                                <span><i class="far fa-calendar"></i> 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 15ID -->
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Project 15ID" class="project-image">
+                        <div class="project-details">
+                            <h4 class="project-name">Project 15ID</h4>
+                            <span class="project-type">RESTAURANTS (F&B)</span>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> India
+                            </div>
+                            <div class="project-meta">
+                                <span><i class="far fa-calendar"></i> 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 14ID -->
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2232&q=80" alt="Project 14ID" class="project-image">
+                        <div class="project-details">
+                            <h4 class="project-name">Project 14ID</h4>
+                            <span class="project-type">RESIDENTIAL (RESI)</span>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> India
+                            </div>
+                            <div class="project-meta">
+                                <span><i class="far fa-calendar"></i> 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Landscape Design Projects -->
+            <div class="category-section">
+                <h3 class="category-title">📗 Landscape Design</h3>
+                <div class="projects-grid">
+                    <!-- Project 4LD -->
+                    <div class="project-card">
+                        <div class="coming-soon">
+                            <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2089&q=80" alt="Project 4LD" class="project-image">
+                        </div>
+                        <div class="project-details">
+                            <h4 class="project-name">Project 4LD</h4>
+                            <span class="project-type">RESIDENTIAL (RESI)</span>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> Coming soon
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 3LD -->
+                    <div class="project-card">
+                        <div class="coming-soon">
+                            <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2089&q=80" alt="Project 3LD" class="project-image">
+                        </div>
+                        <div class="project-details">
+                            <h4 class="project-name">Project 3LD</h4>
+                            <span class="project-type">RESIDENTIAL (RESI)</span>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> Coming soon
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 2LD -->
+                    <div class="project-card">
+                        <div class="coming-soon">
+                            <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2089&q=80" alt="Project 2LD" class="project-image">
+                        </div>
+                        <div class="project-details">
+                            <h4 class="project-name">Project 2LD</h4>
+                            <span class="project-type">RESIDENTIAL (RESI)</span>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> Coming soon
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 1LD -->
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2089&q=80" alt="Project 1LD" class="project-image">
+                        <div class="project-details">
+                            <h4 class="project-name">Project 1LD</h4>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> Baptista garden
+                            </div>
+                            <span class="project-type">LANDSCAPING</span>
+                            <div class="project-meta">
+                                <span><i class="fas fa-globe"></i> India</span>
+                                <span><i class="far fa-calendar"></i> 2016</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Urban Design Projects -->
+            <div class="category-section">
+                <h3 class="category-title">📙 Urban Design</h3>
+                <div class="projects-grid">
+                    <!-- Project 4UD -->
+                    <div class="project-card">
+                        <div class="coming-soon">
+                            <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2144&q=80" alt="Project 4UD" class="project-image">
+                        </div>
+                        <div class="project-details">
+                            <h4 class="project-name">Project 4UD</h4>
+                            <span class="project-type">URBAN DESIGN (UD)</span>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> Coming soon
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 3UD -->
+                    <div class="project-card">
+                        <div class="coming-soon">
+                            <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2144&q=80" alt="Project 3UD" class="project-image">
+                        </div>
+                        <div class="project-details">
+                            <h4 class="project-name">Project 3UD</h4>
+                            <span class="project-type">URBAN DESIGN (UD)</span>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> Coming soon
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 2UD -->
+                    <div class="project-card">
+                        <div class="coming-soon">
+                            <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2144&q=80" alt="Project 2UD" class="project-image">
+                        </div>
+                        <div class="project-details">
+                            <h4 class="project-name">Project 2UD</h4>
+                            <span class="project-type">URBAN DESIGN (UD)</span>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> Coming soon
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 1UD -->
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2144&q=80" alt="Project 1UD" class="project-image">
+                        <div class="project-details">
+                            <h4 class="project-name">Project 1UD</h4>
+                            <span class="project-type">URBAN DESIGN (UD)</span>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> India
+                            </div>
+                            <div class="project-meta">
+                                <span><i class="far fa-calendar"></i> 2015</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sustainable Design Projects -->
+            <div class="category-section">
+                <h3 class="category-title">📒 Sustainable Design</h3>
+                <div class="projects-grid">
+                    <!-- Project 4SD -->
+                    <div class="project-card">
+                        <div class="coming-soon">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Project 4SD" class="project-image">
+                        </div>
+                        <div class="project-details">
+                            <h4 class="project-name">Project 4SD</h4>
+                            <span class="project-type">SUSTAINABLE DESIGN</span>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> Coming soon
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 3SD -->
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Project 3SD" class="project-image">
+                        <div class="project-details">
+                            <h4 class="project-name">Project 3SD</h4>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> Skyway
+                            </div>
+                            <span class="project-type">URBAN DESIGN (UD)</span>
+                            <div class="project-meta">
+                                <span><i class="fas fa-globe"></i> India</span>
+                                <span><i class="far fa-calendar"></i> 2015</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 2SD -->
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Project 2SD" class="project-image">
+                        <div class="project-details">
+                            <h4 class="project-name">Project 2SD</h4>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> Skyway
+                            </div>
+                            <span class="project-type">URBAN DESIGN (UD)</span>
+                            <div class="project-meta">
+                                <span><i class="fas fa-globe"></i> India</span>
+                                <span><i class="far fa-calendar"></i> 2015</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 1SD -->
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Project 1SD" class="project-image">
+                        <div class="project-details">
+                            <h4 class="project-name">Project 1SD</h4>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> Skyway
+                            </div>
+                            <span class="project-type">URBAN DESIGN (UD)</span>
+                            <div class="project-meta">
+                                <span><i class="fas fa-globe"></i> India</span>
+                                <span><i class="far fa-calendar"></i> 2015</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ArchViz Projects -->
+            <div class="category-section">
+                <h3 class="category-title">📓 ArchViz & Illustrations</h3>
+                <div class="projects-grid">
+                    <!-- Project 1AV -->
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Project 1AV" class="project-image">
+                        <div class="project-details">
+                            <h4 class="project-name">Project 1AV</h4>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> Mendon Kitchen
+                            </div>
+                            <span class="project-type">ARCHVIZ</span>
+                            <div class="project-meta">
+                                <span><i class="fas fa-globe"></i> India</span>
+                                <span><i class="far fa-calendar"></i> 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 15 -->
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Project 15" class="project-image">
+                        <div class="project-details">
+                            <h4 class="project-name">Project 15</h4>
+                            <span class="project-type">RESTAURANTS (F&B)</span>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> ArchViz
+                            </div>
+                            <div class="project-meta">
+                                <span><i class="fas fa-globe"></i> India</span>
+                                <span><i class="far fa-calendar"></i> 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 14 -->
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2232&q=80" alt="Project 14" class="project-image">
+                        <div class="project-details">
+                            <h4 class="project-name">Project 14</h4>
+                            <span class="project-type">RESIDENTIAL (RESI)</span>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> ArchViz
+                            </div>
+                            <div class="project-meta">
+                                <span><i class="fas fa-globe"></i> India</span>
+                                <span><i class="far fa-calendar"></i> 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 13 -->
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2232&q=80" alt="Project 13" class="project-image">
+                        <div class="project-details">
+                            <h4 class="project-name">Project 13</h4>
+                            <span class="project-type">RESIDENTIAL (RESI)</span>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i> ArchViz
+                            </div>
+                            <div class="project-meta">
+                                <span><i class="fas fa-globe"></i> India</span>
+                                <span><i class="far fa-calendar"></i> 2022</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           
+            <!-- Did You Know Section -->
+            <div class="did-you-know">
+                <h3>Did You Know?</h3>
+                <p>As Designers we work in several different sectors.</p>
+                <p>Whether working in a high-end residential sector in Chelsea, or in the middle of the ocean on a 5k capacity cruise ship, there's no limit to the sectors we as Interior Designers can "flex our creative muscles" in. Here we list our most popular sectors that as Interior Designers we work in.</p>
+                
+                <ul class="sector-list">
+                    <li class="sector-item">
+                        <h4 class="sector-title">1. RESIDENTIAL (RESI)</h4>
+                        <p class="sector-desc">
+                            Generally residential Interior Design focuses on high-end properties and the owner has a theme in mind. Popular ideas are sustainable living or generally staying "on-trend".
+                            Residential will also apply to multi-unit developments and marketing suites. This can range from small local estates through to large housing developments.
+                            Experienced Residential Interior Designers may also be commissioned to work with home/furniture retail outlets to help dress home-like showrooms.
+                        </p>
+                    </li>
+                    
+                    <li class="sector-item">
+                        <h4 class="sector-title">2. HOSPITALITY</h4>
+                        <p class="sector-desc">
+                            From lobbies to ball rooms and suites, hotels and the like are no stranger to Interior Design requirements. With high footfalls, this sector is where an Interior Designer can really make their mark with a budget to boot.
+                        </p>
+                    </li>
+                    
+                    <li class="sector-item">
+                        <h4 class="sector-title">3. RESTAURANTS (F&B)</h4>
+                        <p class="sector-desc">
+                            Making a food establishment welcoming, on brand and functional all at the same time is no mean feat. This sector can be the perfect opportunity for an ambitious interior designer to give themselves a serious challenge. A post-fit visit to check out the cuisine should be a must too!
+                        </p>
+                    </li>
+                    
+                    <li class="sector-item">
+                        <h4 class="sector-title">4. RETAIL</h4>
+                        <p class="sector-desc">
+                            All shops require a degree of shopfitting and thus design. This can be from a small independent unit through to a 3 million sq ft retail outlet. The design of these establishments requires strong technical abilities plus a degree of commercial awareness in order to support the company to best sell within their space.
+                        </p>
+                    </li>
+                    
+                    <li class="sector-item">
+                        <h4 class="sector-title">5. WORKPLACE</h4>
+                        <p class="sector-desc">
+                            Working out space plans for businesses moving into new premises' or looking for a change is the Workplace Interior Designer's biggest pleasure. Businesses recognise that workplace interior design can make all the difference to employees and play a huge part in comfort and engagement for staff retention.
+                        </p>
+                    </li>
+                    
+                    <li class="sector-item">
+                        <h4 class="sector-title">6. INSTITUTIONAL</h4>
+                        <p class="sector-desc">
+                            Schools, colleges, universities and private education all require an approachable, comfortable space in which to learn. It is important for these environments to enhance the learning experience not hinder it. This means surroundings should not be distracting or impair absorption. This can be a very rewarding challenge for Interior Designers who know they have contributed towards the future success of students.
+                        </p>
+                    </li>
+                    
+                    <li class="sector-item">
+                        <h4 class="sector-title">7. MARINE</h4>
+                        <p class="sector-desc">
+                            Focusing on the luxury market, cruise ships require a high level of interior design in order to enforce their prestige and indulgence. They compete with the on-land hotels and holiday destinations but also require the practicalities of being on the sea. Luxury Yachts will also feature in this sector too. This market is certainly a treat for any Interior Designer looking to work in this glamourous industry.
+                        </p>
+                    </li>
+                    
+                    <li class="sector-item">
+                        <h4 class="sector-title">8. AVIATION</h4>
+                        <p class="sector-desc">
+                            Generally, aviation is focused on practicality due to its longer "shelf-life". However recently Interior Designers have set their sites on this sector in order to start "weaving this softer edge into the cabin experience" (Silva, Apex 2019) and that aircrafts should start to be an extension of the passenger's lifestyle. While Aircraft Interior Design is not a new thing, it looks as though things may be changing within this sector.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Quick Links Section -->
+        <div class="quick-links-container">
+            <h3 class="quick-links-header">🌀 Links</h3>
+            <div class="quick-links">
+                <a href="https://fivespace.netlify.app/Projects by Category.html" class="quick-link">
+                    <span>🚦</span> Back to Category
+                </a>
+                <a href="https://fivespace.netlify.app/Home.html" class="quick-link">
+                    <span>🏕️</span> Back to Home
+                </a>
+                <a href="https://fivespace.netlify.app/Projects.html" class="quick-link">
+                    <span>🦕</span> Back to Projects
+                </a>
+                <a href="mailto:sales@fivespace.app" class="quick-link">
+                    <span>✉️</span> Email Us
+                </a>
+                <a href="https://youtube.com/@fivespaceofficial710?si=pX8qeBSnWSDLF2cG" target="_blank" class="quick-link">
+                    <span>📹</span> YouTube
+                </a>
+                <a href="https://t.me/fivespaceofficial" target="_blank" class="quick-link">
+                    <span>💬</span> Telegram
+                </a>
+                <a href="https://fivespace.netlify.app/Privacy policy.html" class="quick-link">
+                    <span>⚖️</span> Privacy Policy
+                </a>
+                <a href="https://fivespace.netlify.app/terms conditions.html" class="quick-link">
+                    <span>📃</span> Terms
+                </a>
+                <a href="https://fivespace.netlify.app/404%20not%20found" class="quick-link">
+                    <span>🚧</span> 404 Page
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div>© 2025 FiveSpace Design. All rights reserved.</div>
+        <div class="footer-links">
+            <a href="https://fivespace.netlify.app/terms conditions.html">Terms and Conditions</a>
+            <a href="https://fivespace.netlify.app/Privacy policy.html">Privacy Policy</a>
+        </div>
+    </footer>
+
+    <!-- JavaScript (Same as template) -->
+    <script>
+        // Pre-cache DOM elements for maximum performance
+        const dom = {
+            mobileBtn: document.getElementById('mobileMenuBtn'),
+            navMenu: document.getElementById('navMenu'),
+            navIcon: document.getElementById('mobileMenuBtn').querySelector('i'),
+            dropdownItems: document.querySelectorAll('.dropdown-item')
+        };
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // INSTANT mobile menu toggle
+            dom.mobileBtn.addEventListener('click', function() {
+                const isActive = dom.navMenu.classList.toggle('active');
+                dom.navIcon.className = isActive ? 'fas fa-times' : 'fas fa-bars';
+                
+                // Force synchronous layout update for zero delay
+                void dom.navMenu.offsetWidth;
+            }, {passive: true});
+            
+            // Enhanced dropdown functionality for desktop
+            dom.dropdownItems.forEach(item => {
+                const link = item.querySelector('.nav-link');
+                const dropdown = item.querySelector('.dropdown');
+                
+                // For desktop - hover behavior
+                item.addEventListener('mouseenter', () => {
+                    if (window.innerWidth > 992) {
+                        dropdown.style.opacity = '1';
+                        dropdown.style.visibility = 'visible';
+                        dropdown.style.transform = 'translateY(0)';
+                    }
+                });
+                
+                item.addEventListener('mouseleave', () => {
+                    if (window.innerWidth > 992) {
+                        dropdown.style.opacity = '0';
+                        dropdown.style.visibility = 'hidden';
+                        dropdown.style.transform = 'translateY(10px)';
+                    }
+                });
+                
+                // For mobile - click behavior
+                if (window.innerWidth <= 992) {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        dropdown.classList.toggle('active');
+                    }, {passive: false});
+                }
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (window.innerWidth <= 992 && 
+                    !e.target.closest('.nav-container') && 
+                    dom.navMenu.classList.contains('active')) {
+                    dom.navMenu.classList.remove('active');
+                    dom.navIcon.className = 'fas fa-bars';
+                }
+            }, {passive: true});
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 992 && dom.navMenu.classList.contains('active')) {
+                    dom.navMenu.classList.remove('active');
+                    dom.navIcon.className = 'fas fa-bars';
+                    
+                    // Close all dropdowns on desktop
+                    document.querySelectorAll('.dropdown').forEach(dropdown => {
+                        dropdown.classList.remove('active');
+                    });
+                }
+            }, {passive: true});
+            
+            // Allow navigation to main links while keeping dropdown functionality
+            dom.dropdownItems.forEach(item => {
+                const link = item.querySelector('.nav-link');
+                
+                link.addEventListener('click', function(e) {
+                    if (window.innerWidth > 992) {
+                        e.preventDefault();
+                        window.location.href = this.href;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
