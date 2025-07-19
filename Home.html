@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FiveSpace Design®</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="1c7a35cb40c98ed3e40fe122d8381476.jpg" type="image/jpg">
+    <style>
+        :root {
+            --primary: #2c82d1;
+            --nav-bg: rgba(245, 242, 213, 0.95);
+            --text-white: #ffffff;
+            --text-dark: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f5f2d5;
+            color: var(--text-dark);
+            padding-top: 70px;
+            min-height: 100vh;
+        }
+        
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--nav-bg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        
+        .logo-nav {
+            height: 40px;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            cursor: pointer;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-link {
+            color: var(--text-dark);
+            text-decoration: none;
+            padding: 10px 15px;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-white);
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+        
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 1.5rem;
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .hero-text h1 {
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-text .subtitle {
+            font-size: clamp(0.8rem, 2vw, 1.2rem);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Buttons */
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .btn {
+            padding: 1rem;
+            border: 2px solid var(--text-white);
+            color: var(--text-white);
+            border-radius: 12px;
+            text-align: center;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            width: 180px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--nav-bg);
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .footer-copyright {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .footer-link {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Mobile Menu */
+        @media (max-width: 992px) {
+            .mobile-menu-btn { display: block; }
+            
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--nav-bg);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .nav-menu.active { transform: translateX(0); }
+            
+            .logo-title { display: none; }
+            
+            /* Tablet buttons - 3x3 */
+            .btn {
+                width: calc(33.33% - 1rem);
+                min-width: 150px;
+            }
+        }
+        
+        /* Mobile buttons - 2x2x2x2x1 */
+        @media (max-width: 576px) {
+            .btn {
+                width: calc(50% - 0.5rem);
+                padding: 0.8rem;
+            }
+            
+            .button-group:last-child .btn:last-child {
+                width: 100%;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo-wrapper">
+                <a href="https://fivespace.netlify.app/Home.html">
+                    <img src="1c7a35cb40c98ed3e40fe122d8381476.jpg" alt="FiveSpace Logo" class="logo-nav">
+                </a>
+                <span class="logo-title">FiveSpace Design® Studio</span>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="https://fivespace.netlify.app/Home.html" class="nav-link">Home</a></li>
+                <li><a href="https://fivespace.netlify.app/Projects.html" class="nav-link">Projects</a></li>
+                <li><a href="https://fivespace.netlify.app/Services.html" class="nav-link">Services</a></li>
+                <li><a href="https://fivespace.netlify.app/About.html" class="nav-link">About</a></li>
+                <li><a href="https://fivespace.netlify.app/Contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Modern Architecture" class="hero-background">
+        
+        <div class="hero-content">
+            <img src="1c7a35cb40c98ed3e40fe122d8381476.jpg" alt="FiveSpace Logo" class="logo">
+            
+            <div class="hero-text">
+                <h1>FiveSpace Design® Studio</h1>
+                <div class="subtitle">Innovative Architectural Solutions</div>
+            </div>
+            
+            <div class="button-group">
+                <a href="https://fivespace.netlify.app/Copy of Projects AD.html" class="btn">
+                    <i class="fas fa-building"></i>
+                    <div>Architecture</div>
+                    <small>Innovative structural designs</small>
+                </a>
+                <a href="https://fivespace.netlify.app/Copy of Projects IN.html" class="btn">
+                    <i class="fas fa-couch"></i>
+                    <div>Interior</div>
+                    <small>Beautiful living spaces</small>
+                </a>
+                <a href="https://fivespace.netlify.app/Copy of Projects LD.html" class="btn">
+                    <i class="fas fa-tree"></i>
+                    <div>Landscape</div>
+                    <small>Harmonious outdoor designs</small>
+                </a>
+                <a href="https://fivespace.netlify.app/Copy of Projects UD.html" class="btn">
+                    <i class="fas fa-city"></i>
+                    <div>Urban Design</div>
+                    <small>Sustainable city planning</small>
+                </a>
+                <a href="https://fivespace.netlify.app/Copy of Projects SD.html" class="btn">
+                    <i class="fas fa-leaf"></i>
+                    <div>Sustainable Design</div>
+                    <small>Eco-friendly solutions</small>
+                </a>
+                <a href="https://fivespace.netlify.app/Copy of Projects AV.html" class="btn">
+                    <i class="fas fa-vr-cardboard"></i>
+                    <div>ArchViz</div>
+                    <small>Immersive 3D visualizations</small>
+                </a>
+            </div>
+            
+            <div class="button-group">
+                <a href="https://fivespace.netlify.app/Work Process.html" class="btn">
+                    <i class="fas fa-project-diagram"></i>
+                    <div>Work Process</div>
+                    <small>How we create magic</small>
+                </a>
+                <a href="https://fivespace.netlify.app/Contact.html" class="btn">
+                    <i class="fas fa-envelope"></i>
+                    <div>Get a Free Quote</div>
+                    <small>Start your project today</small>
+                </a>
+                <a href="https://fivespace.netlify.app/About.html" class="btn">
+                    <i class="fas fa-info-circle"></i>
+                    <div>About</div>
+                    <small>Our story and philosophy</small>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-copyright">© 2025 FiveSpace Design. All rights reserved.</div>
+        <div class="footer-links">
+            <a href="https://fivespace.netlify.app/Privacy policy.html" class="footer-link">Privacy Policy</a>
+            <a href="https://fivespace.netlify.app/terms conditions.html" class="footer-link">Terms and Conditions</a>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileBtn = document.getElementById('mobileMenuBtn');
+            const navMenu = document.getElementById('navMenu');
+            
+            mobileBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                mobileBtn.querySelector('i').className = 
+                    navMenu.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
+            });
+        });
+    </script>
+</body>
+</html>
